@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import {
   applyDiscount,
+  findDiscount,
   formatPrice,
   loadJson,
   subtotalOf,
@@ -44,6 +45,7 @@ export function App() {
 
   const subtotal = subtotalOf(cart)
   const total = appliedCode ? applyDiscount(subtotal, discounts, appliedCode) : subtotal
+  const invalidCode = appliedCode !== null && !findDiscount(discounts, appliedCode)
 
   return (
     <div className="shop">
@@ -104,13 +106,14 @@ export function App() {
               Apply
             </button>
           </form>
+          {invalidCode && <p className="muted">That discount code isn't valid.</p>}
 
           <dl className="totals">
             <div>
               <dt>Subtotal</dt>
               <dd>{formatPrice(subtotal)}</dd>
             </div>
-            {appliedCode && (
+            {appliedCode && !invalidCode && (
               <div>
                 <dt>Discount ({appliedCode.toUpperCase()})</dt>
                 <dd>−{formatPrice(subtotal - total)}</dd>
