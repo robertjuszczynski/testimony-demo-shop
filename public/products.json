@@ -1,0 +1,5 @@
+[
+  { "id": "ethiopia", "name": "Ethiopia Yirgacheffe", "notes": "Jasmine, bergamot, peach", "price": 1890 },
+  { "id": "colombia", "name": "Colombia Huila", "notes": "Red apple, caramel, cocoa", "price": 1590 },
+  { "id": "kenya", "name": "Kenya Nyeri", "notes": "Blackcurrant, grapefruit, tomato", "price": 2190 }
+]
