@@ -23,6 +23,7 @@ export function subtotalOf(lines: CartLine[]) {
 
 export function applyDiscount(subtotal: number, discounts: Discounts, code: string) {
   const discount = discounts[code.trim().toUpperCase()]
+  if (!discount) return subtotal
   return Math.round(subtotal * (1 - discount.percent / 100))
 }
 

@@ -20,4 +20,8 @@ describe('applyDiscount', () => {
   it('ignores case and surrounding spaces', () => {
     expect(applyDiscount(2000, discounts, '  save10 ')).toBe(1800)
   })
+
+  it('leaves the subtotal unchanged for an unknown code', () => {
+    expect(applyDiscount(2000, discounts, 'fdsafdsafd')).toBe(2000)
+  })
 })
