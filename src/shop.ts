@@ -21,8 +21,13 @@ export function subtotalOf(lines: CartLine[]) {
   return lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0)
 }
 
+export function findDiscount(discounts: Discounts, code: string): Discount | undefined {
+  return discounts[code.trim().toUpperCase()]
+}
+
 export function applyDiscount(subtotal: number, discounts: Discounts, code: string) {
-  const discount = discounts[code.trim().toUpperCase()]
+  const discount = findDiscount(discounts, code)
+  if (!discount) return subtotal
   return Math.round(subtotal * (1 - discount.percent / 100))
 }
 
