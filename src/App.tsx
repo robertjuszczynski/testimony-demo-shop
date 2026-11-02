@@ -15,6 +15,7 @@ export function App() {
   const [cart, setCart] = useState<CartLine[]>([])
   const [code, setCode] = useState('')
   const [appliedCode, setAppliedCode] = useState<string | null>(null)
+  const [codeError, setCodeError] = useState<string | null>(null)
 
   useEffect(() => {
     loadJson<Product[]>('/products.json').then(setProducts)
@@ -39,6 +40,11 @@ export function App() {
 
   function submitCode(event: FormEvent) {
     event.preventDefault()
+    if (!discounts[code.trim().toUpperCase()]) {
+      setCodeError('Invalid code')
+      return
+    }
+    setCodeError(null)
     setAppliedCode(code)
   }
 
@@ -104,6 +110,11 @@ export function App() {
               Apply
             </button>
           </form>
+          {codeError && (
+            <p className="muted" role="alert">
+              {codeError}
+            </p>
+          )}
 
           <dl className="totals">
             <div>
